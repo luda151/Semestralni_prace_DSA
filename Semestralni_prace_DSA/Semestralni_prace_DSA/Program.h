@@ -91,7 +91,7 @@ class Program
 				cout << "Vybral si:" + den + " " + cas << endl;
 				cout << "Vyber film který chceš přiřadit:" << endl;
 				cout << "Aktuálně přidané filmy:" << endl;
-				film.zobrazFilmy();
+				//film.zobrazFilmy();
 				cout << "Zadej název filmu" << endl;
 				cout << "8: Zpět" << endl;
 				cin >> filmik;

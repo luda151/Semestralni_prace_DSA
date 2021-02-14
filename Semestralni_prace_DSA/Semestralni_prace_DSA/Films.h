@@ -10,63 +10,41 @@ class Films
 	public:
 		~Films();
 
-		const static int velikostPole = 50;
-		string films[velikostPole];
+		const static int velikostPole = 10;
+		string films;
 		string tmp;
 		int pozice;
 		string updatePrvku;
 		string novyNazev;
 		string hledanyPrvek;
 
-		void addFilm()
-		{
-			cin >> tmp;
-			for (int i = 0; i < velikostPole; i++)
-			{
-				if (films[i] == "")
-				{
-					films[i] = tmp;
-					i = velikostPole;
-				}
-			}
-		}
-
 		void setName()
 		{
 			cin >> updatePrvku;
 			for (int i = 0; i < velikostPole; i++)
 			{
-				if (films[i] == updatePrvku)
+				if (films == updatePrvku)
 				{ 
 					cout << "Prvek " << updatePrvku << " nalezen: " << "." << endl;
 					cout << "Zadejte nový název: " << endl;
 					cin >> novyNazev;
-					films[i] = novyNazev;
+					films = novyNazev;
 				}
 			}
 			cout << "Film nenalezen." << endl;
 		}
 	
-		void zobrazFilmy()
+		
+		void seradSestupne()//uprav funkci
 		{
-			for (int i = 0; i < velikostPole; i++)
-			{
-				if (films[i] != "")
-				{
-					cout << films[i] << endl;
-				}
-			}
-		}
-		void seradSestupne()
-		{
-			sort(films, films + velikostPole);
+			//sort(films, films + velikostPole);
 
 		}
 		
 		void seradVzestupne()
 		{
-			sort(films, films + velikostPole);
-			reverse(films, films + velikostPole);
+			//sort(films, films + velikostPole);
+			//reverse(films, films + velikostPole);
 		}
 
 		void vypisFiltr()
@@ -74,12 +52,12 @@ class Films
 			cin >> hledanyPrvek;
 			for (int i = 0; i < velikostPole; i++)
 			{
-				if (films[i] != "" && films[i].find(hledanyPrvek))
+				if (films != "" && films.find(hledanyPrvek))
 				{
-					cout << films[i] << endl;
+					cout << films << endl;
 				}
 			}
-			find(films, films + velikostPole, hledanyPrvek);
+			//find(films, films + velikostPole, hledanyPrvek);
 		}
 		bool existujeFilm(string film)
 		{

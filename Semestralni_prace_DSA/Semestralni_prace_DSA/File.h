@@ -19,7 +19,7 @@ class File
 		ifstream File("filmy.txt");
 		int i = 0;
 		while (getline(File, tmp)) {
-			film.films[i] = tmp;
+			film.films = tmp;
 			i = i + 1;
 		}
 		File.close();

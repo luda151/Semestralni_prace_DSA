@@ -3,8 +3,8 @@
 #include "Films.h"
 #include "File.h"
 #include "Menu.h"
-
 #include <iostream>
+#include "Knihovna.h"
 
 using namespace std;
 
@@ -14,9 +14,11 @@ class Menu
 		Menu();
 		~Menu();
 
+		int const static velikost = 10;
 		File file;
-		Films film;
+		Films film[velikost];
 		Program program;
+
 
 		int menu()
 		{
@@ -49,14 +51,14 @@ class Menu
 
 				case 3:
 					cout << "3: import filmu" << endl;
-					film = file.importDat();
+					//film = file.importDat();
 					cout << "import dat proběhl" << endl;
 					break;
 
 				case 4:
 					cout << "4: export filmu" << endl;
-					file.exportDat(film);
-					cout << film.films[0] << endl;
+					//file.exportDat(film);
+					//cout << film.films << endl;
 					break;
 
 				case 5:
@@ -90,19 +92,20 @@ class Menu
 
 				int menu1;
 				int filter;
+				
 				cin >> menu1;
 				switch (menu1)
 				{
 				case 1:
 					cout << "1: Pridej Film" << endl;
 					cout << "zadej název filmu: " << endl;
-					film.addFilm();
+					addFilm(film);
 					break;
 
 				case 2:
 					cout << "2: Uprav film" << endl;
-					cout << "zadej název filmu: " << endl;
-					film.setName();
+					cout << "zadej název filmu který cheš změnit: " << endl;
+					updateName(film);
 					break;
 
 				case 3:
@@ -112,23 +115,23 @@ class Menu
 
 				case 4:
 					cout << "4: Zobraz filmy" << endl;
-					film.zobrazFilmy();
+					zobrazFilmy(film);
 					break;
 
 				case 5:
 					cout << "5: Serad filmy sestupně ▼" << endl;
-					film.seradSestupne();
+					//film.seradSestupne();
 					break;
 
 				case 6:
 					cout << "6: Serad filmy vzestupně ▲" << endl;
-					film.seradVzestupne();
+					//film.seradVzestupne();
 					break;
 
 				case 7:
 					cout << "7: Zobraz filmy s dle filtru" << endl;
 					cout << "7: Zadej filtr: " << endl;
-					film.vypisFiltr();
+					//film.vypisFiltr();
 					break;
 				case 8:
 					menu();
@@ -288,32 +291,32 @@ class Menu
 					case 1:
 						cout << "1: 12:00" << endl;
 						program.cas = "12:00";
-						program.priradFilm(film);
+						//program.priradFilm(film);
 						return program;
 					case 2:
 						cout << "2: 14:00" << endl;
 						program.cas = "14:00";
-						program.priradFilm(film);
+						//program.priradFilm(film);
 						return program;
 					case 3:
 						cout << "3: 16:00" << endl;
 						program.cas = "16:00";
-						program.priradFilm(film);
+						//program.priradFilm(film);
 						return program;
 					case 4:
 						cout << "4: 18:00" << endl;
 						program.cas = "18:00";
-						program.priradFilm(film);
+						//program.priradFilm(film);
 						return program;
 					case 5:
 						cout << "5: 20:00" << endl;
 						program.cas = "20:00";
-						program.priradFilm(film);
+						//program.priradFilm(film);
 						return program;
 					case 6:
 						cout << "6: 22:00" << endl;
 						program.cas = "20:00";
-						program.priradFilm(film);
+						//program.priradFilm(film);
 						return program;
 					case 8:
 						//cout << "8: Zpět" << endl;
