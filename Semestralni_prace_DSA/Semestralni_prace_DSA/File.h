@@ -3,6 +3,8 @@
 #include <fstream>
 #include "Films.h"
 #include "Menu.h"
+#include "Knihovna.h"
+#include "File.h"
 
 using namespace std;
 
@@ -12,30 +14,26 @@ class File
 		File();
 		~File();
 
-	Films importDat()
+	Films importDat(Films* film)
 	{
-		Films film;
 		string tmp;
 		ifstream File("filmy.txt");
-		int i = 0;
 		while (getline(File, tmp)) {
-			film.films = tmp;
-			i = i + 1;
-		}
+			addFilm(film, tmp);
+			}
 		File.close();
-		return film;
+		return *film;
 	}
 
-	void exportDat(Films film)
+	void exportDat(Films film[])
 	{
-		//Films film;
 		ofstream File("filmy.txt");
-		for (int i = 0; i < film.velikostPole; i++)
+		for (int i = 0; i < velikost; i++)
 		{
-			//if (film.films[i] != "")
-			//{
-				File << film.films[i]<< endl;
-			//}
+		if (film[i].nazev != "")
+			{
+			File << film[i].nazev << endl;
+			}
 		}
 		File.close();
 	}

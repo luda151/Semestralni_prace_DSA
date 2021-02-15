@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include "Films.h"
+#include "Knihovna.h"
 using namespace std;
 
 class Program
@@ -83,21 +84,20 @@ class Program
 			}
 		}
 
-
-		void priradFilm(Films film)
+		void priradFilm(Films* film)
 		{
 			bool exist = 0;
 			while (exist==0) {
 				cout << "Vybral si:" + den + " " + cas << endl;
 				cout << "Vyber film který chceš přiřadit:" << endl;
 				cout << "Aktuálně přidané filmy:" << endl;
-				//film.zobrazFilmy();
+				zobrazFilmy(film);
 				cout << "Zadej název filmu" << endl;
 				cout << "8: Zpět" << endl;
 				cin >> filmik;
-				exist = film.existujeFilm(filmik);
+				exist = Exist(film, filmik);
 					if (filmik == "8") {
-						exist = true;
+						break;
 					}
 			}
 			cout << "Přiřadil si:" + den + " " + cas + " " + filmik << endl;

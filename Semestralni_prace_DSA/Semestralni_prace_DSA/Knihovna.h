@@ -3,17 +3,11 @@
 #include "Knihovna.h"
 using namespace std;
 
-void test()
-{
-	cout << "Ahoj svete" << endl;
-}
-
 /*
 Add() - Přidá nový prvek.
 Clear() - Vymaže všechny prvky.
 Contains() - Vrátí true, pokud obsahuje daný prvek.
 Delete() - Vymaže daný prvek.
-Count() - Vrátí počet prvků.
 Find() - Vyhledá daný prvek pomocí predikátu (který je, jak již víme, delegátem). Je to velmi jednoduché a efektivní.
 Exists() - Vraci true pokud byl nějaký nalezený, jinak false.
 Reverse() - Převrátí list tak, aby byl 1. prvek jako poslední a naopak poslední jako první.
@@ -32,92 +26,90 @@ int CountNotNullFilm(Films film[], int velikost)
 	int pocet = 0;
 	for (int i = 0; i < velikost; i++)
 	{
-		if (film[i].films != "")
+		if (film[i].nazev != "")
 		{
-			pocet = pocet + 1;
+			pocet++;
 		}
 	}
 	return pocet;
 }
 
-void addFilm(Films film[velikost])
+void addFilm(Films film[],string tmp)
 {
-	cin >> tmp;
 	int pocet = CountNotNullFilm(film, velikost);
 	if (pocet < velikost)
 	{
 		for (int i = 0; i < velikost; i++)
 		{
-			if (film[i].films == "")
+			if (film[i].nazev == "" && tmp != "")
 			{
-				film[i].films = tmp;
-				i = velikost;
-				cout << "film přidán" << endl;
+				film[i].nazev = tmp;
+				break;
 			}
 		}
 	}
 	else
 	{
 		//resize();
-		addFilm(film);
+		addFilm(film, tmp);
 	}
 }
 
-void zobrazFilmy(Films film[velikost])
+void zobrazFilmy(Films film[])
 {
 	for (int i = 0; i < velikost; i++)
 		{
-			if (film[i].films != "")
+			if (film[i].nazev != "")
 			{
-				cout << film[i].films << endl;
+				cout << film[i].nazev << endl;
 			}
 		}
 	}
 
-void updateName(Films film[velikost])
+void updateName(Films film[])
 {
 	cin >> tmp;
 	cout << "Zadej nový název" << endl;
 	cin >> tmp2;
 	for (int i = 0; i < velikost; i++)
 	{
-		if (film[i].films == tmp)
+		if (film[i].nazev == tmp)
 		{
-			film[i].films = tmp2;
+			film[i].nazev = tmp2;
 		}
 	}
 }
 
-void Delete(Films film[velikost])
+void Delete(Films film[])
 {
 	cin >> tmp;
 	for (int i = 0; i < velikost; i++)
 	{
-		if (film[i].films == tmp)
+		if (film[i].nazev == tmp)
 		{
-			film[i].films = "";
+			film[i].nazev = "";
 		}
 	}
 }
 
-bool Contains(Films film[velikost], string string)
+bool Contains(Films film[], string string)
 {
 	for (int p = 0; p < velikost; p++)
 	{
-		if (film[p].films.size() > string.size())
+		if (film[p].nazev.size() > string.size())
 		{
 			return false;
 		}
 
 		for (int i = 0; i < string.size(); i++) {
 			int j = 0;
-			if (string[i] == film[i].films[j]) {
+			if (string[i] == film[i].nazev[j]) {
 				int k = i;
-				while (string[i] == film[i].films[j] && j < film[i].films.size()) {
+				while (string[i] == film[i].nazev[j] && j < film[i].nazev.size()) {
 					j++;
 					i++;
 				}
-				if (j == film[i].films.size())
+				if (j == film[i].nazev.size())
 				{
 					return true;
 				}
@@ -130,36 +122,27 @@ bool Contains(Films film[velikost], string string)
 		return false;
 	}
 }
-		
 
-int Count(string list[])
-{
-	int a = sizeof(list);
-	int b = sizeof(*list);
-	int x = a / b;
-	return x;
-}
-
-string Find(Films film[velikost], string string)
+string Find(Films film[], string string)
 {
 	for (int p = 0; p < velikost; p++)
 	{
-		if (film[p].films.size() > string.size())
+		if (film[p].nazev.size() > string.size())
 		{
-			return "";
+			break;
 		}
 
 		for (int i = 0; i < string.size(); i++) {
 			int j = 0;
-			if (string[i] == film[i].films[j]) {
+			if (string[i] == film[i].nazev[j]) {
 				int k = i;
-				while (string[i] == film[i].films[j] && j < film[i].films.size()) {
+				while (string[i] == film[i].nazev[j] && j < film[i].nazev.size()) {
 					j++;
 					i++;
 				}
-				if (j == film[i].films.size())
+				if (j == film[i].nazev.size())
 				{
-					tmp = tmp + film[p].films;
+					tmp += film[p].nazev;
 				}
 				else
 				{
@@ -171,62 +154,72 @@ string Find(Films film[velikost], string string)
 	return tmp;
 }
 
-void resize()
+// todo
+void resize(int*& a, int& n)
 {
-	;
+	int new_n = 2 * n;
+	int* new_a = new int[new_n];
+	copy(a, a + n, new_a);
+	delete[] a;
+	a = new_a;
+	n = new_n;
 }
 
-bool Exists(Films film[velikost], string tmp)
+bool Exist
+
+(Films film[], string tmp)
 {
 	for (int i = 0; i < velikost; i++)
 	{
-		if (film[i].films == tmp)
+		if (film[i].nazev == tmp)
 		{
 			return true;
 		}
 	}
 	return false;	
 }
-//void Reverse(string list[])
-//{
-//	int pocet = CountNotNull(list, velikost);
-//	for (size_t i = 0, l = (pocet - 1); i < (pocet - 1); i++, l--)
-//	{
-//		if (i < l) {
-//			string z = list[i];
-//			list[i] = list[l];
-//			list[l] = z;
-//		}
-//	}
-//
-//}
-//
-//void Sort(string* list, int reverse)
-//{
-//	//kdyz mas vic jak pocet bodu muzes ven
-//	bool muzesVen = false;
-//	int pocet = CountNotNull(list, velikost);
-//	while (muzesVen == false) {
-//		int bod = 0;
-//		for (size_t i = 0; i < 9; i++)
-//		{
-//			if (i != pocet && list[i] > list[(i + 1)])
-//			{
-//				bod = bod + 1;
-//			}
-//			else
-//			{
-//				string x = list[i];
-//				list[i] = list[(i + 1)];
-//				list[(i + 1)] = x;
-//			}
-//		}
-//		if (bod >= pocet) {
-//			muzesVen = true;
-//		}
-//	}
-//	if (reverse == 0)
-//	{
-//		Reverse(list);
-//	}
-//}
+void Reverse(Films film[])
+{
+	int pocet = CountNotNullFilm(film, velikost);
+	for (int i = 0, l = (pocet - 1); i < (pocet - 1); i++, l--)
+	{
+		if (i < l) {
+			string z = film[i].nazev;
+			film[i].nazev = film[l].nazev;
+			film[l].nazev = z;
+		}
+	}
+
+}
+
+//sort reverse 0-1 sezstupně vzestupně
+void Sort(Films film[], int reverse)
+{
+	//kdyz mas jak pocet bodu je seřazeno
+	bool muzesVen = false;
+	int pocet = CountNotNullFilm(film, velikost);
+	while (muzesVen == false) {
+		int bod = 0;
+		for (size_t i = 0; i < 9; i++)
+		{
+			if (i != pocet && film[i].nazev > film[(i + 1)].nazev)
+			{
+				bod = bod + 1;
+			}
+			else
+			{
+				string x = film[i].nazev;
+				film[i].nazev = film[(i + 1)].nazev;
+				film[(i + 1)].nazev = x;
+			}
+		}
+		if (bod >= pocet) {
+			muzesVen = true;
+		}
+	}
+	if (reverse == 0)
+	{
+		Reverse(film);
+	}
+}
+
